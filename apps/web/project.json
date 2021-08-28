@@ -1,35 +1,34 @@
 {
+  "prefix": "blog",
   "projectType": "application",
   "root": "apps/web",
   "sourceRoot": "apps/web/src",
-  "prefix": "blog",
+  "tags": [
+    "domain:blog",
+    "type:app"
+  ],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/apps/web",
-        "index": "apps/web/src/index.html",
-        "main": "apps/web/src/main.ts",
-        "polyfills": "apps/web/src/polyfills.ts",
-        "tsConfig": "apps/web/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
-        "assets": ["apps/web/src/favicon.ico", "apps/web/src/assets"],
-        "styles": ["apps/web/src/styles.scss"],
-        "scripts": []
-      },
       "configurations": {
+        "development": {
+          "buildOptimizer": false,
+          "extractLicenses": false,
+          "namedChunks": true,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
         "production": {
           "budgets": [
             {
-              "type": "initial",
+              "maximumError": "1mb",
               "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "type": "initial"
             },
             {
-              "type": "anyComponentStyle",
+              "maximumError": "4kb",
               "maximumWarning": "2kb",
-              "maximumError": "4kb"
+              "type": "anyComponentStyle"
             }
           ],
           "fileReplacements": [
@@ -39,32 +38,29 @@
             }
           ],
           "outputHashing": "all"
-        },
-        "development": {
-          "buildOptimizer": false,
-          "optimization": false,
-          "vendorChunk": true,
-          "extractLicenses": false,
-          "sourceMap": true,
-          "namedChunks": true
         }
       },
-      "defaultConfiguration": "production"
-    },
-    "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
-      "configurations": {
-        "production": {
-          "browserTarget": "web:build:production"
-        },
-        "development": {
-          "browserTarget": "web:build:development"
-        }
-      },
-      "defaultConfiguration": "development",
+      "defaultConfiguration": "production",
+      "executor": "@angular-devkit/build-angular:browser",
       "options": {
-        "proxyConfig": "apps/web/proxy.conf.json"
-      }
+        "assets": [
+          "apps/web/src/favicon.ico",
+          "apps/web/src/assets"
+        ],
+        "index": "apps/web/src/index.html",
+        "inlineStyleLanguage": "scss",
+        "main": "apps/web/src/main.ts",
+        "outputPath": "dist/apps/web",
+        "polyfills": "apps/web/src/polyfills.ts",
+        "scripts": [],
+        "styles": [
+          "apps/web/src/styles.scss"
+        ],
+        "tsConfig": "apps/web/tsconfig.app.json"
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ]
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -75,17 +71,37 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/web/src/**/*.ts", "apps/web/src/**/*.html"]
+        "lintFilePatterns": [
+          "apps/web/src/**/*.ts",
+          "apps/web/src/**/*.html"
+        ]
+      }
+    },
+    "serve": {
+      "configurations": {
+        "development": {
+          "browserTarget": "web:build:development"
+        },
+        "production": {
+          "browserTarget": "web:build:production"
+        }
+      },
+      "defaultConfiguration": "development",
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "port": 4100,
+        "proxyConfig": "apps/web/proxy.conf.json"
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/web"],
       "options": {
         "jestConfig": "apps/web/jest.config.js",
         "passWithNoTests": true
-      }
+      },
+      "outputs": [
+        "coverage/apps/web"
+      ]
     }
-  },
-  "tags": ["domain:blog", "type:app"]
+  }
 }
