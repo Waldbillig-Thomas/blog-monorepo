@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  development:
+    image: development
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ~/.ssh:/root/.ssh
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ..:/workspace:cached
+    environment:
+      - DATABASE_URL=postgresql://user:password@database:5432/application?schema=public
+    links:
+      - database
+      - redis
+    command: sleep infinity
+
+  database:
+    image: postgres:alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=application
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379

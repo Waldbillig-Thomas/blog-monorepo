@@ -1,0 +1,79 @@
+{
+  "name": "Blog Development",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "development",
+  "workspaceFolder": "/workspace",
+  "remoteEnv": {
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  },
+  "settings": {
+    "diffEditor.codeLens": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorSmoothCaretAnimation": true,
+    "editor.cursorStyle": "block",
+    "editor.fontLigatures": true,
+    "editor.tabSize": 2,
+    "inline-parameters.enabled": true,
+    "search.mode": "reuseEditor",
+    "search.showLineNumbers": true,
+    "tabnine.experimentalAutoImports": true,
+    "workbench.colorTheme": "Cobalt2",
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.iconTheme": "material-icon-theme",
+  },
+  "extensions": [
+    /* frontend ***************************************************************/
+    "angular.ng-template",
+    "johnpapa.angular2",
+    "nrwl.angular-console",
+    "stylelint.vscode-stylelint",
+    /* debugging & testing ****************************************************/
+    "firefox-devtools.vscode-firefox-debug",
+    "firsttris.vscode-jest-runner",
+    "msjsdiag.debugger-for-edge",
+    "rangav.vscode-thunder-client",
+    "editorconfig.editorconfig",
+    /* editor *****************************************************************/
+    "bierner.emojisense",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "johnpapa.vscode-peacock",
+    "liamhammett.inline-parameters",
+    "mechatroner.rainbow-csv",
+    // "ms-vsliveshare.vsliveshare-pack",
+    "oderwat.indent-rainbow",
+    "pflannery.vscode-versionlens",
+    "streetsidesoftware.code-spell-checker",
+    "tabnine.tabnine-vscode",
+    "usernamehw.errorlens",
+    "vincaslt.highlight-matching-tag",
+    "visualstudioexptteam.vscodeintellicode",
+    "wayou.vscode-todo-highlight",
+    "yzhang.markdown-all-in-one",
+    /* git & tools ************************************************************/
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+    "ms-azure-devops.azure-pipelines",
+    "ms-azuretools.vscode-docker",
+    /* graphql & prisma *******************************************************/
+    "apollographql.vscode-apollo",
+    "graphql.vscode-graphql",
+    "prisma.prisma",
+    /* theming ****************************************************************/
+    "pkief.material-icon-theme",
+    "wesbos.theme-cobalt2",
+    /* utilities **************************************************************/
+    "ibm.output-colorizer",
+    "irongeek.vscode-env",
+    "quicktype.quicktype",
+    "redhat.vscode-yaml",
+    "ryu1kn.partial-diff",
+    "stkb.rewrap",
+    "tyriar.sort-lines",
+    "wmaurer.change-case"
+  ],
+  "forwardPorts": [],
+  "postCreateCommand": "yarn && yarn prisma db push ",
+  "remoteUser": "vscode"
+}
