@@ -9,3 +9,18 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+model Author {
+  id        String @id @default(uuid())
+  firstName String
+  lastName  String
+  posts     Post[]
+}
+
+model Post {
+  id       String @id @default(uuid())
+  title    String
+  content  String
+  author   Author @relation(fields: [authorId], references: [id])
+  authorId String
+}
