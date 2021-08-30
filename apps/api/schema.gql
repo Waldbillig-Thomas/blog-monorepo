@@ -1,0 +1,416 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AffectedRows {
+  count: Int!
+}
+
+type Author {
+  firstName: String!
+  gender: Gender!
+  id: ID!
+  lastName: String!
+  posts: [Post!]
+}
+
+type AuthorCountAggregate {
+  _all: Int!
+  firstName: Int!
+  gender: Int!
+  id: Int!
+  lastName: Int!
+}
+
+input AuthorCountAggregateInput {
+  _all: Boolean
+  firstName: Boolean
+  gender: Boolean
+  id: Boolean
+  lastName: Boolean
+}
+
+input AuthorCreateInput {
+  firstName: String!
+  gender: Gender!
+  id: String
+  lastName: String!
+  posts: PostCreateNestedManyWithoutAuthorInput
+}
+
+input AuthorCreateManyInput {
+  firstName: String!
+  gender: Gender!
+  id: String
+  lastName: String!
+}
+
+input AuthorCreateNestedOneWithoutPostsInput {
+  connect: AuthorWhereUniqueInput
+  connectOrCreate: AuthorCreateOrConnectWithoutPostsInput
+  create: AuthorCreateWithoutPostsInput
+}
+
+input AuthorCreateOrConnectWithoutPostsInput {
+  create: AuthorCreateWithoutPostsInput!
+  where: AuthorWhereUniqueInput!
+}
+
+input AuthorCreateWithoutPostsInput {
+  firstName: String!
+  gender: Gender!
+  id: String
+  lastName: String!
+}
+
+input AuthorMaxAggregateInput {
+  firstName: Boolean
+  gender: Boolean
+  id: Boolean
+  lastName: Boolean
+}
+
+input AuthorMinAggregateInput {
+  firstName: Boolean
+  gender: Boolean
+  id: Boolean
+  lastName: Boolean
+}
+
+input AuthorOrderByInput {
+  firstName: SortOrder
+  gender: SortOrder
+  id: SortOrder
+  lastName: SortOrder
+}
+
+input AuthorRelationFilter {
+  is: AuthorWhereInput
+  isNot: AuthorWhereInput
+}
+
+enum AuthorScalarFieldEnum {
+  firstName
+  gender
+  id
+  lastName
+}
+
+input AuthorUpdateInput {
+  firstName: StringFieldUpdateOperationsInput
+  gender: EnumGenderFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
+  posts: PostUpdateManyWithoutAuthorInput
+}
+
+input AuthorUpdateManyMutationInput {
+  firstName: StringFieldUpdateOperationsInput
+  gender: EnumGenderFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
+}
+
+input AuthorUpdateOneRequiredWithoutPostsInput {
+  connect: AuthorWhereUniqueInput
+  connectOrCreate: AuthorCreateOrConnectWithoutPostsInput
+  create: AuthorCreateWithoutPostsInput
+  update: AuthorUpdateWithoutPostsInput
+  upsert: AuthorUpsertWithoutPostsInput
+}
+
+input AuthorUpdateWithoutPostsInput {
+  firstName: StringFieldUpdateOperationsInput
+  gender: EnumGenderFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
+}
+
+input AuthorUpsertWithoutPostsInput {
+  create: AuthorCreateWithoutPostsInput!
+  update: AuthorUpdateWithoutPostsInput!
+}
+
+input AuthorWhereInput {
+  AND: [AuthorWhereInput!]
+  NOT: [AuthorWhereInput!]
+  OR: [AuthorWhereInput!]
+  firstName: StringFilter
+  gender: EnumGenderFilter
+  id: StringFilter
+  lastName: StringFilter
+  posts: PostListRelationFilter
+}
+
+input AuthorWhereUniqueInput {
+  id: String
+}
+
+input EnumGenderFieldUpdateOperationsInput {
+  set: Gender
+}
+
+input EnumGenderFilter {
+  equals: Gender
+  in: [Gender!]
+  not: NestedEnumGenderFilter
+  notIn: [Gender!]
+}
+
+enum Gender {
+  FEMALE
+  MALE
+}
+
+type Mutation {
+  AuthorCreate(data: AuthorCreateInput!): Author!
+  AuthorCreateMany(data: [AuthorCreateManyInput!]!, skipDuplicates: Boolean): AffectedRows!
+  AuthorDelete(where: AuthorWhereUniqueInput!): Author!
+  AuthorDeleteMany(where: AuthorWhereInput): AffectedRows!
+  AuthorUpdate(data: AuthorUpdateInput!, where: AuthorWhereUniqueInput!): Author!
+  AuthorUpdateMany(data: AuthorUpdateManyMutationInput!, where: AuthorWhereInput): AffectedRows!
+  AuthorUpsert(create: AuthorCreateInput!, update: AuthorUpdateInput!, where: AuthorWhereUniqueInput!): Author!
+  PostCreate(data: PostCreateInput!): Post!
+  PostCreateMany(data: [PostCreateManyInput!]!, skipDuplicates: Boolean): AffectedRows!
+  PostDelete(where: PostWhereUniqueInput!): Post!
+  PostDeleteMany(where: PostWhereInput): AffectedRows!
+  PostUpdate(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post!
+  PostUpdateMany(data: PostUpdateManyMutationInput!, where: PostWhereInput): AffectedRows!
+  PostUpsert(create: PostCreateInput!, update: PostUpdateInput!, where: PostWhereUniqueInput!): Post!
+}
+
+input NestedEnumGenderFilter {
+  equals: Gender
+  in: [Gender!]
+  not: NestedEnumGenderFilter
+  notIn: [Gender!]
+}
+
+input NestedStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+type Post {
+  author: Author!
+  authorId: String!
+  content: String!
+  id: ID!
+  title: String!
+}
+
+type PostCountAggregate {
+  _all: Int!
+  authorId: Int!
+  content: Int!
+  id: Int!
+  title: Int!
+}
+
+input PostCountAggregateInput {
+  _all: Boolean
+  authorId: Boolean
+  content: Boolean
+  id: Boolean
+  title: Boolean
+}
+
+input PostCreateInput {
+  author: AuthorCreateNestedOneWithoutPostsInput!
+  content: String!
+  id: String
+  title: String!
+}
+
+input PostCreateManyAuthorInput {
+  content: String!
+  id: String
+  title: String!
+}
+
+input PostCreateManyAuthorInputEnvelope {
+  data: [PostCreateManyAuthorInput!]!
+  skipDuplicates: Boolean
+}
+
+input PostCreateManyInput {
+  authorId: String!
+  content: String!
+  id: String
+  title: String!
+}
+
+input PostCreateNestedManyWithoutAuthorInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
+  create: [PostCreateWithoutAuthorInput!]
+  createMany: PostCreateManyAuthorInputEnvelope
+}
+
+input PostCreateOrConnectWithoutAuthorInput {
+  create: PostCreateWithoutAuthorInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostCreateWithoutAuthorInput {
+  content: String!
+  id: String
+  title: String!
+}
+
+input PostListRelationFilter {
+  every: PostWhereInput
+  none: PostWhereInput
+  some: PostWhereInput
+}
+
+input PostMaxAggregateInput {
+  authorId: Boolean
+  content: Boolean
+  id: Boolean
+  title: Boolean
+}
+
+input PostMinAggregateInput {
+  authorId: Boolean
+  content: Boolean
+  id: Boolean
+  title: Boolean
+}
+
+input PostOrderByInput {
+  authorId: SortOrder
+  content: SortOrder
+  id: SortOrder
+  title: SortOrder
+}
+
+enum PostScalarFieldEnum {
+  authorId
+  content
+  id
+  title
+}
+
+input PostScalarWhereInput {
+  AND: [PostScalarWhereInput!]
+  NOT: [PostScalarWhereInput!]
+  OR: [PostScalarWhereInput!]
+  authorId: StringFilter
+  content: StringFilter
+  id: StringFilter
+  title: StringFilter
+}
+
+input PostUpdateInput {
+  author: AuthorUpdateOneRequiredWithoutPostsInput
+  content: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+}
+
+input PostUpdateManyMutationInput {
+  content: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+}
+
+input PostUpdateManyWithWhereWithoutAuthorInput {
+  data: PostUpdateManyMutationInput!
+  where: PostScalarWhereInput!
+}
+
+input PostUpdateManyWithoutAuthorInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
+  create: [PostCreateWithoutAuthorInput!]
+  createMany: PostCreateManyAuthorInputEnvelope
+  delete: [PostWhereUniqueInput!]
+  deleteMany: [PostScalarWhereInput!]
+  disconnect: [PostWhereUniqueInput!]
+  set: [PostWhereUniqueInput!]
+  update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
+  updateMany: [PostUpdateManyWithWhereWithoutAuthorInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input PostUpdateWithWhereUniqueWithoutAuthorInput {
+  data: PostUpdateWithoutAuthorInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostUpdateWithoutAuthorInput {
+  content: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+}
+
+input PostUpsertWithWhereUniqueWithoutAuthorInput {
+  create: PostCreateWithoutAuthorInput!
+  update: PostUpdateWithoutAuthorInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostWhereInput {
+  AND: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  author: AuthorRelationFilter
+  authorId: StringFilter
+  content: StringFilter
+  id: StringFilter
+  title: StringFilter
+}
+
+input PostWhereUniqueInput {
+  id: String
+}
+
+type Query {
+  AuthorAggregate(_count: AuthorCountAggregateInput, _max: AuthorMaxAggregateInput, _min: AuthorMinAggregateInput, cursor: AuthorWhereUniqueInput, orderBy: [AuthorOrderByInput!], skip: Int, take: Int, where: AuthorWhereInput): AuthorCountAggregate!
+  AuthorFindFirst(cursor: AuthorWhereUniqueInput, distinct: [AuthorScalarFieldEnum!], orderBy: [AuthorOrderByInput!], skip: Int, take: Int, where: AuthorWhereInput): Author!
+  AuthorFindMany(cursor: AuthorWhereUniqueInput, distinct: [AuthorScalarFieldEnum!], orderBy: [AuthorOrderByInput!], skip: Int, take: Int, where: AuthorWhereInput): [Author!]!
+  AuthorFindUnique(where: AuthorWhereUniqueInput!): Author!
+  PostAggregate(_count: PostCountAggregateInput, _max: PostMaxAggregateInput, _min: PostMinAggregateInput, cursor: PostWhereUniqueInput, orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): PostCountAggregate!
+  PostFindFirst(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): Post!
+  PostFindMany(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!
+  PostFindUnique(where: PostWhereUniqueInput!): Post!
+}
+
+enum QueryMode {
+  default
+  insensitive
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
