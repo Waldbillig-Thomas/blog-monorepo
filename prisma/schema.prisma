@@ -10,10 +10,22 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator nestgraphql {
+  provider          = "node node_modules/prisma-nestjs-graphql"
+  output            = "../apps/api/src"
+  outputFilePattern = "{model}/{plural.type}/{name}.{type}.ts"
+}
+
+enum Gender {
+  FEMALE
+  MALE
+}
+
 model Author {
   id        String @id @default(uuid())
   firstName String
   lastName  String
+  gender    Gender
   posts     Post[]
 }
 
