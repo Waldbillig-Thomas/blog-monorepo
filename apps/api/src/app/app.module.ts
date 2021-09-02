@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 import { GqlModuleOptions, GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
+import { AuthorModule } from '../author/author.module';
 import { environment } from '../environments/environment';
+import { PostModule } from '../post/post.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -14,7 +16,7 @@ const graphqlOptions: GqlModuleOptions = {
 };
 
 @Module({
-  imports: [GraphQLModule.forRoot(graphqlOptions)],
+  imports: [GraphQLModule.forRoot(graphqlOptions), AuthorModule, PostModule],
   controllers: [AppController],
   providers: [AppService],
 })
