@@ -20,7 +20,26 @@
       "linter": "eslint",
       "unitTestRunner": "jest"
     },
-    "@nrwl/angular:component": {
+    "@schematics/angular:component": {
+      "changeDetection": "OnPush",
+      "displayBlock": true,
+      "flat": true,
+      "inlineStyle": true,
+      "inlineTemplate": true,
+      "style": "scss"
+    },
+    "@angular/material:dashboard": {
+      "style": "scss",
+      "changeDetection": "OnPush",
+      "flat": true,
+      "inlineStyle": true,
+      "inlineTemplate": true
+    },
+    "@angular/material:navigation": {
+      "changeDetection": "OnPush",
+      "flat": true,
+      "inlineStyle": true,
+      "inlineTemplate": true,
       "style": "scss"
     }
   },
