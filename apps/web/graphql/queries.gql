@@ -1,0 +1,8 @@
+query AuthorSearch {
+  AuthorFindMany {
+    id
+    gender
+    lastName
+    id
+  }
+}
