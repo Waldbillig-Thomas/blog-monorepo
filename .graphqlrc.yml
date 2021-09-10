@@ -5,8 +5,9 @@ extensions:
     generates:
       apps/web/src/sdk.ts:
         plugins:
+          - fragment-matcher
           - typescript
-          - typescript-operations
           - typescript-apollo-angular
+          - typescript-operations
         documents: apps/web/graphql/*.gql
     overwrite: true

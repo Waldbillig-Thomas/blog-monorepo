@@ -7,7 +7,7 @@ import { Component, HostBinding } from '@angular/core';
       <router-outlet></router-outlet>
     </blog-navigation>
   `,
-  styles: [``],
+  styles: [],
 })
 export class AppComponent {
   @HostBinding('class')
