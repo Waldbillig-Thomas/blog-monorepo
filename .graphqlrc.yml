@@ -3,7 +3,7 @@ documents: ''
 extensions:
   codegen:
     generates:
-      apps/web/src/sdk.ts:
+      apps/web/src/generated/graphql.ts:
         documents: apps/web/graphql/*.gql
         plugins:
           - typescript

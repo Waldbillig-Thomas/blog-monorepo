@@ -1,8 +1,15 @@
-query AuthorSearch {
-  AuthorFindMany {
+fragment AuthorEntry on Author {
+  id
+  firstName
+  lastName
+  gender
+}
+
+query AuthorSearch($skip: Int) {
+  AuthorFindMany(skip: $skip) {
     id
-    gender
+    firstName
     lastName
-    id
+    gender
   }
 }
