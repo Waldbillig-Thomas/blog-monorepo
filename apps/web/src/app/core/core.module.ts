@@ -6,17 +6,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterModule } from '@angular/router';
 import { NavigationComponent } from './navigation.component';
 
 @NgModule({
   imports: [
     CommonModule,
     LayoutModule,
-    MatToolbarModule,
     MatButtonModule,
-    MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    RouterModule,
   ],
   declarations: [NavigationComponent],
   exports: [NavigationComponent],

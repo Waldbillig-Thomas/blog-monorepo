@@ -15,13 +15,14 @@ import { map, shareReplay } from 'rxjs/operators';
         [mode]="(isHandset$ | async) ? 'over' : 'side'"
         [opened]="(isHandset$ | async) === false"
       >
-        <mat-toolbar color="accent">Menu</mat-toolbar>
+        <mat-toolbar>Menu</mat-toolbar>
         <mat-nav-list>
           <a mat-list-item href="#">Link 1</a>
           <a mat-list-item href="#">Link 2</a>
           <a mat-list-item href="#">Link 3</a>
         </mat-nav-list>
       </mat-sidenav>
+
       <mat-sidenav-content>
         <mat-toolbar color="primary">
           <button
@@ -33,9 +34,10 @@ import { map, shareReplay } from 'rxjs/operators';
           >
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
           </button>
-          <span>web</span>
+          <span>Title</span>
         </mat-toolbar>
-        <!-- Add Content Here -->
+
+        <router-outlet></router-outlet>
       </mat-sidenav-content>
     </mat-sidenav-container>
   `,

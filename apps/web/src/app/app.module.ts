@@ -1,11 +1,24 @@
-import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
+import { InMemoryCache } from '@apollo/client/core';
+import { APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLink } from 'apollo-angular/http';
 import { AppComponent } from './app.component';
-import { AuthorModule } from './author/author.module';
 import { CoreModule } from './core/core.module';
-import { PostModule } from './post/post.module';
+
+const ApolloProvider: Provider = {
+  provide: APOLLO_OPTIONS,
+  useFactory: (httpLink: HttpLink) => {
+    return {
+      cache: new InMemoryCache(),
+      link: httpLink.create({ uri: 'http://localhost:4000/graphql' }),
+    };
+  },
+  deps: [HttpLink],
+};
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'author' },
@@ -23,14 +36,13 @@ const routes: Routes = [
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    AuthorModule,
     BrowserAnimationsModule,
     BrowserModule,
     CoreModule,
-    PostModule,
+    HttpClientModule,
     RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' }),
   ],
-  providers: [],
+  providers: [ApolloProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
