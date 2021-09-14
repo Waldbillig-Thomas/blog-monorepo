@@ -73,5 +73,15 @@
   ],
   "forwardPorts": [],
   "postCreateCommand": "yarn && yarn prisma db push && yarn prisma db seed --preview-feature",
-  "remoteUser": "vscode"
+  "remoteUser": "vscode",
+  "portsAttributes": {
+    "4000": {
+      "label": "api",
+      "onAutoForward": "silent"
+    },
+    "4100": {
+      "label": "web",
+      "onAutoForward": "openPreview"
+    }
+  }
 }
