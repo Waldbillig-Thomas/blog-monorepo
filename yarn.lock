@@ -6810,6 +6810,28 @@ fastify@3.20.1:
     semver "^7.3.2"
     tiny-lru "^7.0.0"
 
+fastify@^3.21.1:
+  version "3.21.1"
+  resolved "https://registry.yarnpkg.com/fastify/-/fastify-3.21.1.tgz#4f77b309d798d4145f2888fa0778398aa313ef44"
+  integrity sha512-BibsysctHZzNAV6oSqTnWVGnEeNDJksk8va642WZeyIzKo0udDSvcR6r8jWtUAWpqWzMC13b7tACdpX9kd0h9w==
+  dependencies:
+    "@fastify/ajv-compiler" "^1.0.0"
+    abstract-logging "^2.0.0"
+    avvio "^7.1.2"
+    fast-json-stringify "^2.5.2"
+    fastify-error "^0.3.0"
+    fastify-warning "^0.2.0"
+    find-my-way "^4.1.0"
+    flatstr "^1.0.12"
+    light-my-request "^4.2.0"
+    pino "^6.13.0"
+    proxy-addr "^2.0.7"
+    readable-stream "^3.4.0"
+    rfdc "^1.1.4"
+    secure-json-parse "^2.0.0"
+    semver "^7.3.2"
+    tiny-lru "^7.0.0"
+
 fastq@^1.6.0:
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.12.0.tgz#ed7b6ab5d62393fb2cc591c853652a5c318bf794"
