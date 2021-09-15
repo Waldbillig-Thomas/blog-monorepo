@@ -17,6 +17,10 @@ export class Author {
     gender!: keyof typeof Gender;
     @Field(() => [Post], { nullable: true })
     posts?: Array<Post>;
+    @Field(() => Date, { nullable: false })
+    createdAt!: Date;
+    @Field(() => Date, { nullable: false })
+    updatedAt!: Date;
 }
 
 @ObjectType()

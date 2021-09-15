@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFilter } from '../../prisma/inputs/string-filter.input';
 import { AuthorRelationFilter } from '../../author/inputs/author-relation-filter.input';
+import { DateTimeFilter } from '../../prisma/inputs/date-time-filter.input';
 
 @InputType()
 export class PostWhereInput {
@@ -29,4 +30,10 @@ export class PostWhereInput {
 
     @Field(() => StringFilter, {nullable:true})
     authorId?: StringFilter;
+
+    @Field(() => DateTimeFilter, {nullable:true})
+    createdAt?: DateTimeFilter;
+
+    @Field(() => DateTimeFilter, {nullable:true})
+    updatedAt?: DateTimeFilter;
 }

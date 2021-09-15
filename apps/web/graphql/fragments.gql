@@ -3,6 +3,8 @@ fragment AuthorEntry on Author {
   firstName
   lastName
   gender
+  createdAt
+  updatedAt
 }
 
 fragment Pagination on Pagination {

@@ -15,4 +15,10 @@ export class PostUncheckedCreateInput {
 
     @Field(() => String, {nullable:false})
     authorId!: string;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
 }

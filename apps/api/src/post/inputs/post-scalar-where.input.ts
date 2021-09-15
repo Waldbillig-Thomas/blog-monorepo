@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFilter } from '../../prisma/inputs/string-filter.input';
+import { DateTimeFilter } from '../../prisma/inputs/date-time-filter.input';
 
 @InputType()
 export class PostScalarWhereInput {
@@ -25,4 +26,10 @@ export class PostScalarWhereInput {
 
     @Field(() => StringFilter, {nullable:true})
     authorId?: StringFilter;
+
+    @Field(() => DateTimeFilter, {nullable:true})
+    createdAt?: DateTimeFilter;
+
+    @Field(() => DateTimeFilter, {nullable:true})
+    updatedAt?: DateTimeFilter;
 }

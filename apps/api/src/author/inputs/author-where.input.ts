@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { StringFilter } from '../../prisma/inputs/string-filter.input';
 import { EnumGenderFilter } from '../../prisma/inputs/enum-gender-filter.input';
 import { PostListRelationFilter } from '../../post/inputs/post-list-relation-filter.input';
+import { DateTimeFilter } from '../../prisma/inputs/date-time-filter.input';
 
 @InputType()
 export class AuthorWhereInput {
@@ -30,4 +31,10 @@ export class AuthorWhereInput {
 
     @Field(() => PostListRelationFilter, {nullable:true})
     posts?: PostListRelationFilter;
+
+    @Field(() => DateTimeFilter, {nullable:true})
+    createdAt?: DateTimeFilter;
+
+    @Field(() => DateTimeFilter, {nullable:true})
+    updatedAt?: DateTimeFilter;
 }

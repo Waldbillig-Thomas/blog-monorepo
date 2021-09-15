@@ -12,6 +12,8 @@ export interface Scalars {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
+  DateTime: any;
 }
 
 export interface AffectedRows {
@@ -21,43 +23,53 @@ export interface AffectedRows {
 
 export interface Author {
   __typename?: 'Author';
+  createdAt: Scalars['DateTime'];
   firstName: Scalars['String'];
   gender: Gender;
   id: Scalars['ID'];
   lastName: Scalars['String'];
   posts?: Maybe<Array<Post>>;
+  updatedAt: Scalars['DateTime'];
 }
 
 export interface AuthorCountAggregate {
   __typename?: 'AuthorCountAggregate';
   _all: Scalars['Int'];
+  createdAt: Scalars['Int'];
   firstName: Scalars['Int'];
   gender: Scalars['Int'];
   id: Scalars['Int'];
   lastName: Scalars['Int'];
+  updatedAt: Scalars['Int'];
 }
 
 export interface AuthorCountAggregateInput {
   _all?: Maybe<Scalars['Boolean']>;
+  createdAt?: Maybe<Scalars['Boolean']>;
   firstName?: Maybe<Scalars['Boolean']>;
   gender?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['Boolean']>;
   lastName?: Maybe<Scalars['Boolean']>;
+  updatedAt?: Maybe<Scalars['Boolean']>;
 }
 
 export interface AuthorCreateInput {
+  createdAt?: Maybe<Scalars['DateTime']>;
   firstName: Scalars['String'];
   gender: Gender;
   id?: Maybe<Scalars['String']>;
   lastName: Scalars['String'];
   posts?: Maybe<PostCreateNestedManyWithoutAuthorInput>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 }
 
 export interface AuthorCreateManyInput {
+  createdAt?: Maybe<Scalars['DateTime']>;
   firstName: Scalars['String'];
   gender: Gender;
   id?: Maybe<Scalars['String']>;
   lastName: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
 }
 
 export interface AuthorCreateNestedOneWithoutPostsInput {
@@ -72,31 +84,39 @@ export interface AuthorCreateOrConnectWithoutPostsInput {
 }
 
 export interface AuthorCreateWithoutPostsInput {
+  createdAt?: Maybe<Scalars['DateTime']>;
   firstName: Scalars['String'];
   gender: Gender;
   id?: Maybe<Scalars['String']>;
   lastName: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
 }
 
 export interface AuthorMaxAggregateInput {
+  createdAt?: Maybe<Scalars['Boolean']>;
   firstName?: Maybe<Scalars['Boolean']>;
   gender?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['Boolean']>;
   lastName?: Maybe<Scalars['Boolean']>;
+  updatedAt?: Maybe<Scalars['Boolean']>;
 }
 
 export interface AuthorMinAggregateInput {
+  createdAt?: Maybe<Scalars['Boolean']>;
   firstName?: Maybe<Scalars['Boolean']>;
   gender?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['Boolean']>;
   lastName?: Maybe<Scalars['Boolean']>;
+  updatedAt?: Maybe<Scalars['Boolean']>;
 }
 
 export interface AuthorOrderByInput {
+  createdAt?: Maybe<SortOrder>;
   firstName?: Maybe<SortOrder>;
   gender?: Maybe<SortOrder>;
   id?: Maybe<SortOrder>;
   lastName?: Maybe<SortOrder>;
+  updatedAt?: Maybe<SortOrder>;
 }
 
 export interface AuthorRelationFilter {
@@ -112,18 +132,22 @@ export enum AuthorScalarFieldEnum {
 }
 
 export interface AuthorUpdateInput {
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   firstName?: Maybe<StringFieldUpdateOperationsInput>;
   gender?: Maybe<EnumGenderFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   lastName?: Maybe<StringFieldUpdateOperationsInput>;
   posts?: Maybe<PostUpdateManyWithoutAuthorInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 }
 
 export interface AuthorUpdateManyMutationInput {
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   firstName?: Maybe<StringFieldUpdateOperationsInput>;
   gender?: Maybe<EnumGenderFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   lastName?: Maybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 }
 
 export interface AuthorUpdateOneRequiredWithoutPostsInput {
@@ -135,10 +159,12 @@ export interface AuthorUpdateOneRequiredWithoutPostsInput {
 }
 
 export interface AuthorUpdateWithoutPostsInput {
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   firstName?: Maybe<StringFieldUpdateOperationsInput>;
   gender?: Maybe<EnumGenderFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   lastName?: Maybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 }
 
 export interface AuthorUpsertWithoutPostsInput {
@@ -150,15 +176,32 @@ export interface AuthorWhereInput {
   AND?: Maybe<Array<AuthorWhereInput>>;
   NOT?: Maybe<Array<AuthorWhereInput>>;
   OR?: Maybe<Array<AuthorWhereInput>>;
+  createdAt?: Maybe<DateTimeFilter>;
   firstName?: Maybe<StringFilter>;
   gender?: Maybe<EnumGenderFilter>;
   id?: Maybe<StringFilter>;
   lastName?: Maybe<StringFilter>;
   posts?: Maybe<PostListRelationFilter>;
+  updatedAt?: Maybe<DateTimeFilter>;
 }
 
 export interface AuthorWhereUniqueInput {
   id?: Maybe<Scalars['String']>;
+}
+
+export interface DateTimeFieldUpdateOperationsInput {
+  set?: Maybe<Scalars['DateTime']>;
+}
+
+export interface DateTimeFilter {
+  equals?: Maybe<Scalars['DateTime']>;
+  gt?: Maybe<Scalars['DateTime']>;
+  gte?: Maybe<Scalars['DateTime']>;
+  in?: Maybe<Array<Scalars['DateTime']>>;
+  lt?: Maybe<Scalars['DateTime']>;
+  lte?: Maybe<Scalars['DateTime']>;
+  not?: Maybe<NestedDateTimeFilter>;
+  notIn?: Maybe<Array<Scalars['DateTime']>>;
 }
 
 export interface EnumGenderFieldUpdateOperationsInput {
@@ -275,6 +318,17 @@ export interface MutationPostUpsertArgs {
   where: PostWhereUniqueInput;
 }
 
+export interface NestedDateTimeFilter {
+  equals?: Maybe<Scalars['DateTime']>;
+  gt?: Maybe<Scalars['DateTime']>;
+  gte?: Maybe<Scalars['DateTime']>;
+  in?: Maybe<Array<Scalars['DateTime']>>;
+  lt?: Maybe<Scalars['DateTime']>;
+  lte?: Maybe<Scalars['DateTime']>;
+  not?: Maybe<NestedDateTimeFilter>;
+  notIn?: Maybe<Array<Scalars['DateTime']>>;
+}
+
 export interface NestedEnumGenderFilter {
   equals?: Maybe<Gender>;
   in?: Maybe<Array<Gender>>;
@@ -308,8 +362,10 @@ export interface Post {
   author: Author;
   authorId: Scalars['String'];
   content: Scalars['String'];
+  createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
   title: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
 }
 
 export interface PostCountAggregate {
@@ -317,29 +373,37 @@ export interface PostCountAggregate {
   _all: Scalars['Int'];
   authorId: Scalars['Int'];
   content: Scalars['Int'];
+  createdAt: Scalars['Int'];
   id: Scalars['Int'];
   title: Scalars['Int'];
+  updatedAt: Scalars['Int'];
 }
 
 export interface PostCountAggregateInput {
   _all?: Maybe<Scalars['Boolean']>;
   authorId?: Maybe<Scalars['Boolean']>;
   content?: Maybe<Scalars['Boolean']>;
+  createdAt?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['Boolean']>;
   title?: Maybe<Scalars['Boolean']>;
+  updatedAt?: Maybe<Scalars['Boolean']>;
 }
 
 export interface PostCreateInput {
   author: AuthorCreateNestedOneWithoutPostsInput;
   content: Scalars['String'];
+  createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
   title: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
 }
 
 export interface PostCreateManyAuthorInput {
   content: Scalars['String'];
+  createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
   title: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
 }
 
 export interface PostCreateManyAuthorInputEnvelope {
@@ -350,8 +414,10 @@ export interface PostCreateManyAuthorInputEnvelope {
 export interface PostCreateManyInput {
   authorId: Scalars['String'];
   content: Scalars['String'];
+  createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
   title: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
 }
 
 export interface PostCreateNestedManyWithoutAuthorInput {
@@ -368,8 +434,10 @@ export interface PostCreateOrConnectWithoutAuthorInput {
 
 export interface PostCreateWithoutAuthorInput {
   content: Scalars['String'];
+  createdAt?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
   title: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
 }
 
 export interface PostListRelationFilter {
@@ -381,22 +449,28 @@ export interface PostListRelationFilter {
 export interface PostMaxAggregateInput {
   authorId?: Maybe<Scalars['Boolean']>;
   content?: Maybe<Scalars['Boolean']>;
+  createdAt?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['Boolean']>;
   title?: Maybe<Scalars['Boolean']>;
+  updatedAt?: Maybe<Scalars['Boolean']>;
 }
 
 export interface PostMinAggregateInput {
   authorId?: Maybe<Scalars['Boolean']>;
   content?: Maybe<Scalars['Boolean']>;
+  createdAt?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['Boolean']>;
   title?: Maybe<Scalars['Boolean']>;
+  updatedAt?: Maybe<Scalars['Boolean']>;
 }
 
 export interface PostOrderByInput {
   authorId?: Maybe<SortOrder>;
   content?: Maybe<SortOrder>;
+  createdAt?: Maybe<SortOrder>;
   id?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
+  updatedAt?: Maybe<SortOrder>;
 }
 
 export enum PostScalarFieldEnum {
@@ -412,21 +486,27 @@ export interface PostScalarWhereInput {
   OR?: Maybe<Array<PostScalarWhereInput>>;
   authorId?: Maybe<StringFilter>;
   content?: Maybe<StringFilter>;
+  createdAt?: Maybe<DateTimeFilter>;
   id?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
+  updatedAt?: Maybe<DateTimeFilter>;
 }
 
 export interface PostUpdateInput {
   author?: Maybe<AuthorUpdateOneRequiredWithoutPostsInput>;
   content?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   title?: Maybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 }
 
 export interface PostUpdateManyMutationInput {
   content?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   title?: Maybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 }
 
 export interface PostUpdateManyWithWhereWithoutAuthorInput {
@@ -455,8 +535,10 @@ export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
 
 export interface PostUpdateWithoutAuthorInput {
   content?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   title?: Maybe<StringFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 }
 
 export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
@@ -472,8 +554,10 @@ export interface PostWhereInput {
   author?: Maybe<AuthorRelationFilter>;
   authorId?: Maybe<StringFilter>;
   content?: Maybe<StringFilter>;
+  createdAt?: Maybe<DateTimeFilter>;
   id?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
+  updatedAt?: Maybe<DateTimeFilter>;
 }
 
 export interface PostWhereUniqueInput {
@@ -617,7 +701,7 @@ export interface StringFilter {
   startsWith?: Maybe<Scalars['String']>;
 }
 
-export type AuthorEntryFragment = { __typename?: 'Author', id: string, firstName: string, lastName: string, gender: Gender };
+export type AuthorEntryFragment = { __typename?: 'Author', id: string, firstName: string, lastName: string, gender: Gender, createdAt: any, updatedAt: any };
 
 export type PaginationFragment = { __typename?: 'Pagination', pageIndex: number, pageSize: number, total: number };
 
@@ -628,7 +712,7 @@ export type AuthorSearchQueryVariables = Exact<{
 }>;
 
 
-export type AuthorSearchQuery = { __typename?: 'Query', pagination: { __typename?: 'Pagination', pageIndex: number, pageSize: number, total: number }, entries: Array<{ __typename?: 'Author', id: string, firstName: string, lastName: string, gender: Gender }> };
+export type AuthorSearchQuery = { __typename?: 'Query', pagination: { __typename?: 'Pagination', pageIndex: number, pageSize: number, total: number }, entries: Array<{ __typename?: 'Author', id: string, firstName: string, lastName: string, gender: Gender, createdAt: any, updatedAt: any }> };
 
 export const AuthorEntryFragmentDoc = gql`
     fragment AuthorEntry on Author {
@@ -636,6 +720,8 @@ export const AuthorEntryFragmentDoc = gql`
   firstName
   lastName
   gender
+  createdAt
+  updatedAt
 }
     `;
 export const PaginationFragmentDoc = gql`

@@ -15,4 +15,10 @@ export class PostMinAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     authorId?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    createdAt?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    updatedAt?: true;
 }

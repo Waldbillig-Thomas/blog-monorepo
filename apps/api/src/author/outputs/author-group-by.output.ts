@@ -20,6 +20,12 @@ export class AuthorGroupBy {
     @Field(() => Gender, {nullable:false})
     gender!: keyof typeof Gender;
 
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date | string;
+
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date | string;
+
     @Field(() => AuthorCountAggregate, {nullable:true})
     _count?: AuthorCountAggregate;
 

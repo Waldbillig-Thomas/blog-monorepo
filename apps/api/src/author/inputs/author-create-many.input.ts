@@ -16,4 +16,10 @@ export class AuthorCreateManyInput {
 
     @Field(() => Gender, {nullable:false})
     gender!: keyof typeof Gender;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
 }

@@ -16,4 +16,10 @@ export class AuthorOrderByInput {
 
     @Field(() => SortOrder, {nullable:true})
     gender?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    createdAt?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    updatedAt?: keyof typeof SortOrder;
 }

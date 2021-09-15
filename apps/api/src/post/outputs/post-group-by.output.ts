@@ -19,6 +19,12 @@ export class PostGroupBy {
     @Field(() => String, {nullable:false})
     authorId!: string;
 
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date | string;
+
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date | string;
+
     @Field(() => PostCountAggregate, {nullable:true})
     _count?: PostCountAggregate;
 

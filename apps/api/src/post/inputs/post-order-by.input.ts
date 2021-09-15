@@ -16,4 +16,10 @@ export class PostOrderByInput {
 
     @Field(() => SortOrder, {nullable:true})
     authorId?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    createdAt?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    updatedAt?: keyof typeof SortOrder;
 }

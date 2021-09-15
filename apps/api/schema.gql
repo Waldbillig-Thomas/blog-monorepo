@@ -7,42 +7,52 @@ type AffectedRows {
 }
 
 type Author {
+  createdAt: DateTime!
   firstName: String!
   gender: Gender!
   id: ID!
   lastName: String!
   posts: [Post!]
+  updatedAt: DateTime!
 }
 
 type AuthorCountAggregate {
   _all: Int!
+  createdAt: Int!
   firstName: Int!
   gender: Int!
   id: Int!
   lastName: Int!
+  updatedAt: Int!
 }
 
 input AuthorCountAggregateInput {
   _all: Boolean
+  createdAt: Boolean
   firstName: Boolean
   gender: Boolean
   id: Boolean
   lastName: Boolean
+  updatedAt: Boolean
 }
 
 input AuthorCreateInput {
+  createdAt: DateTime
   firstName: String!
   gender: Gender!
   id: String
   lastName: String!
   posts: PostCreateNestedManyWithoutAuthorInput
+  updatedAt: DateTime
 }
 
 input AuthorCreateManyInput {
+  createdAt: DateTime
   firstName: String!
   gender: Gender!
   id: String
   lastName: String!
+  updatedAt: DateTime
 }
 
 input AuthorCreateNestedOneWithoutPostsInput {
@@ -57,31 +67,39 @@ input AuthorCreateOrConnectWithoutPostsInput {
 }
 
 input AuthorCreateWithoutPostsInput {
+  createdAt: DateTime
   firstName: String!
   gender: Gender!
   id: String
   lastName: String!
+  updatedAt: DateTime
 }
 
 input AuthorMaxAggregateInput {
+  createdAt: Boolean
   firstName: Boolean
   gender: Boolean
   id: Boolean
   lastName: Boolean
+  updatedAt: Boolean
 }
 
 input AuthorMinAggregateInput {
+  createdAt: Boolean
   firstName: Boolean
   gender: Boolean
   id: Boolean
   lastName: Boolean
+  updatedAt: Boolean
 }
 
 input AuthorOrderByInput {
+  createdAt: SortOrder
   firstName: SortOrder
   gender: SortOrder
   id: SortOrder
   lastName: SortOrder
+  updatedAt: SortOrder
 }
 
 input AuthorRelationFilter {
@@ -97,18 +115,22 @@ enum AuthorScalarFieldEnum {
 }
 
 input AuthorUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
   gender: EnumGenderFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
   posts: PostUpdateManyWithoutAuthorInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input AuthorUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
   gender: EnumGenderFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input AuthorUpdateOneRequiredWithoutPostsInput {
@@ -120,10 +142,12 @@ input AuthorUpdateOneRequiredWithoutPostsInput {
 }
 
 input AuthorUpdateWithoutPostsInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
   gender: EnumGenderFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input AuthorUpsertWithoutPostsInput {
@@ -135,15 +159,37 @@ input AuthorWhereInput {
   AND: [AuthorWhereInput!]
   NOT: [AuthorWhereInput!]
   OR: [AuthorWhereInput!]
+  createdAt: DateTimeFilter
   firstName: StringFilter
   gender: EnumGenderFilter
   id: StringFilter
   lastName: StringFilter
   posts: PostListRelationFilter
+  updatedAt: DateTimeFilter
 }
 
 input AuthorWhereUniqueInput {
   id: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
 }
 
 input EnumGenderFieldUpdateOperationsInput {
@@ -179,6 +225,17 @@ type Mutation {
   PostUpsert(create: PostCreateInput!, update: PostUpdateInput!, where: PostWhereUniqueInput!): Post!
 }
 
+input NestedDateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
 input NestedEnumGenderFilter {
   equals: Gender
   in: [Gender!]
@@ -210,37 +267,47 @@ type Post {
   author: Author!
   authorId: String!
   content: String!
+  createdAt: DateTime!
   id: ID!
   title: String!
+  updatedAt: DateTime!
 }
 
 type PostCountAggregate {
   _all: Int!
   authorId: Int!
   content: Int!
+  createdAt: Int!
   id: Int!
   title: Int!
+  updatedAt: Int!
 }
 
 input PostCountAggregateInput {
   _all: Boolean
   authorId: Boolean
   content: Boolean
+  createdAt: Boolean
   id: Boolean
   title: Boolean
+  updatedAt: Boolean
 }
 
 input PostCreateInput {
   author: AuthorCreateNestedOneWithoutPostsInput!
   content: String!
+  createdAt: DateTime
   id: String
   title: String!
+  updatedAt: DateTime
 }
 
 input PostCreateManyAuthorInput {
   content: String!
+  createdAt: DateTime
   id: String
   title: String!
+  updatedAt: DateTime
 }
 
 input PostCreateManyAuthorInputEnvelope {
@@ -251,8 +318,10 @@ input PostCreateManyAuthorInputEnvelope {
 input PostCreateManyInput {
   authorId: String!
   content: String!
+  createdAt: DateTime
   id: String
   title: String!
+  updatedAt: DateTime
 }
 
 input PostCreateNestedManyWithoutAuthorInput {
@@ -269,8 +338,10 @@ input PostCreateOrConnectWithoutAuthorInput {
 
 input PostCreateWithoutAuthorInput {
   content: String!
+  createdAt: DateTime
   id: String
   title: String!
+  updatedAt: DateTime
 }
 
 input PostListRelationFilter {
@@ -282,22 +353,28 @@ input PostListRelationFilter {
 input PostMaxAggregateInput {
   authorId: Boolean
   content: Boolean
+  createdAt: Boolean
   id: Boolean
   title: Boolean
+  updatedAt: Boolean
 }
 
 input PostMinAggregateInput {
   authorId: Boolean
   content: Boolean
+  createdAt: Boolean
   id: Boolean
   title: Boolean
+  updatedAt: Boolean
 }
 
 input PostOrderByInput {
   authorId: SortOrder
   content: SortOrder
+  createdAt: SortOrder
   id: SortOrder
   title: SortOrder
+  updatedAt: SortOrder
 }
 
 enum PostScalarFieldEnum {
@@ -313,21 +390,27 @@ input PostScalarWhereInput {
   OR: [PostScalarWhereInput!]
   authorId: StringFilter
   content: StringFilter
+  createdAt: DateTimeFilter
   id: StringFilter
   title: StringFilter
+  updatedAt: DateTimeFilter
 }
 
 input PostUpdateInput {
   author: AuthorUpdateOneRequiredWithoutPostsInput
   content: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input PostUpdateManyMutationInput {
   content: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input PostUpdateManyWithWhereWithoutAuthorInput {
@@ -356,8 +439,10 @@ input PostUpdateWithWhereUniqueWithoutAuthorInput {
 
 input PostUpdateWithoutAuthorInput {
   content: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input PostUpsertWithWhereUniqueWithoutAuthorInput {
@@ -373,8 +458,10 @@ input PostWhereInput {
   author: AuthorRelationFilter
   authorId: StringFilter
   content: StringFilter
+  createdAt: DateTimeFilter
   id: StringFilter
   title: StringFilter
+  updatedAt: DateTimeFilter
 }
 
 input PostWhereUniqueInput {
