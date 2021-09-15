@@ -1,15 +1,12 @@
-fragment AuthorEntry on Author {
-  id
-  firstName
-  lastName
-  gender
-}
-
-query AuthorSearch($skip: Int) {
-  AuthorFindMany(skip: $skip) {
-    id
-    firstName
-    lastName
-    gender
+query AuthorSearch(
+  $skip: Int = 0
+  $take: Int = 10
+  $where: AuthorWhereInput = {}
+) {
+  pagination: AuthorPagination(skip: $skip, take: $take, where: $where) {
+    ...Pagination
+  }
+  entries: AuthorFindMany(skip: $skip, take: $take, where: $where) {
+    ...AuthorEntry
   }
 }

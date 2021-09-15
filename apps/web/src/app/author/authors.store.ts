@@ -1,14 +1,17 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { map } from 'rxjs/operators';
-import { AuthorEntryFragment, AuthorSearchGQL } from '../../generated/graphql';
+import {
+  AuthorEntryFragment,
+  AuthorSearchGQL,
+  Pagination,
+} from '../../generated/graphql';
 
 export type AuthorFilters = any;
 
 export interface AuthorsState {
-  authorEntries: AuthorEntryFragment[];
+  entries: AuthorEntryFragment[];
   filters: AuthorFilters;
-  pagination: any;
+  pagination: Pagination;
 }
 
 @Injectable()
@@ -16,16 +19,22 @@ export class AuthorsStore
   extends ComponentStore<AuthorsState>
   implements OnDestroy
 {
-  readonly authorEntries$ = this.select(({ authorEntries }) => authorEntries);
+  readonly entries$ = this.select(({ entries }) => entries);
+  readonly pagination$ = this.select(({ pagination }) => pagination);
 
   constructor(private readonly authorSearchGQL: AuthorSearchGQL) {
-    super({ authorEntries: [], filters: {}, pagination: {} });
+    super({
+      entries: [],
+      filters: {},
+      pagination: { total: 0, pageIndex: 0, pageSize: 0 },
+    });
 
     this.authorSearchGQL
       .fetch()
-      .pipe(map(({ data: { AuthorFindMany } }) => AuthorFindMany))
-      .subscribe((authorEntries) =>
-        this.setState((state) => ({ ...state, authorEntries }))
+      .subscribe(({ data: { pagination, entries } }) =>
+        this.setState(
+          (state): AuthorsState => ({ ...state, pagination, entries })
+        )
       );
   }
 
@@ -46,15 +55,18 @@ export class AuthorsStore
   //   );
   // });
 
-  readonly updateFilters = this.updater((state, filters: AuthorFilters) => ({
-    ...state,
-    filters,
-  }));
+  readonly updateResults = this.updater(
+    (state, entries: AuthorEntryFragment[]): AuthorsState => ({
+      ...state,
+      entries,
+    })
+  );
+
+  readonly updateFilters = this.updater(
+    (state, filters: AuthorFilters): AuthorsState => ({ ...state, filters })
+  );
 
   readonly updatePagination = this.updater(
-    (state, pagination: AuthorFilters) => ({
-      ...state,
-      pagination,
-    })
+    (state, pagination: Pagination): AuthorsState => ({ ...state, pagination })
   );
 }

@@ -3,10 +3,7 @@ import { AuthorsStore } from './authors.store';
 
 @Component({
   selector: 'blog-author-page',
-  template: `
-    <!-- <pre>{{ temp$ | async | json }}</pre> -->
-    <router-outlet></router-outlet>
-  `,
+  template: `<router-outlet></router-outlet>`,
   styles: [
     `
       :host {
@@ -18,11 +15,7 @@ import { AuthorsStore } from './authors.store';
   providers: [AuthorsStore],
 })
 export class AuthorPageComponent implements OnInit {
-  temp$ = this.authorsStore.authorEntries$;
+  constructor() {}
 
-  constructor(private readonly authorsStore: AuthorsStore) {}
-
-  ngOnInit(): void {
-    // console.log(this.authorSearchGQL.document);
-  }
+  ngOnInit(): void {}
 }

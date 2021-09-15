@@ -296,6 +296,13 @@ export interface NestedStringFilter {
   startsWith?: Maybe<Scalars['String']>;
 }
 
+export interface Pagination {
+  __typename?: 'Pagination';
+  pageIndex: Scalars['Int'];
+  pageSize: Scalars['Int'];
+  total: Scalars['Int'];
+}
+
 export interface Post {
   __typename?: 'Post';
   author: Author;
@@ -476,9 +483,11 @@ export interface PostWhereUniqueInput {
 export interface Query {
   __typename?: 'Query';
   AuthorAggregate: AuthorCountAggregate;
+  AuthorCount: Scalars['Int'];
   AuthorFindFirst: Author;
   AuthorFindMany: Array<Author>;
   AuthorFindUnique: Author;
+  AuthorPagination: Pagination;
   PostAggregate: PostCountAggregate;
   PostFindFirst: Post;
   PostFindMany: Array<Post>;
@@ -491,6 +500,16 @@ export interface QueryAuthorAggregateArgs {
   _max?: Maybe<AuthorMaxAggregateInput>;
   _min?: Maybe<AuthorMinAggregateInput>;
   cursor?: Maybe<AuthorWhereUniqueInput>;
+  orderBy?: Maybe<Array<AuthorOrderByInput>>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+  where?: Maybe<AuthorWhereInput>;
+}
+
+
+export interface QueryAuthorCountArgs {
+  cursor?: Maybe<AuthorWhereUniqueInput>;
+  distinct?: Maybe<Array<AuthorScalarFieldEnum>>;
   orderBy?: Maybe<Array<AuthorOrderByInput>>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
@@ -520,6 +539,16 @@ export interface QueryAuthorFindManyArgs {
 
 export interface QueryAuthorFindUniqueArgs {
   where: AuthorWhereUniqueInput;
+}
+
+
+export interface QueryAuthorPaginationArgs {
+  cursor?: Maybe<AuthorWhereUniqueInput>;
+  distinct?: Maybe<Array<AuthorScalarFieldEnum>>;
+  orderBy?: Maybe<Array<AuthorOrderByInput>>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+  where?: Maybe<AuthorWhereInput>;
 }
 
 
@@ -590,12 +619,16 @@ export interface StringFilter {
 
 export type AuthorEntryFragment = { __typename?: 'Author', id: string, firstName: string, lastName: string, gender: Gender };
 
+export type PaginationFragment = { __typename?: 'Pagination', pageIndex: number, pageSize: number, total: number };
+
 export type AuthorSearchQueryVariables = Exact<{
   skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+  where?: Maybe<AuthorWhereInput>;
 }>;
 
 
-export type AuthorSearchQuery = { __typename?: 'Query', AuthorFindMany: Array<{ __typename?: 'Author', id: string, firstName: string, lastName: string, gender: Gender }> };
+export type AuthorSearchQuery = { __typename?: 'Query', pagination: { __typename?: 'Pagination', pageIndex: number, pageSize: number, total: number }, entries: Array<{ __typename?: 'Author', id: string, firstName: string, lastName: string, gender: Gender }> };
 
 export const AuthorEntryFragmentDoc = gql`
     fragment AuthorEntry on Author {
@@ -605,16 +638,24 @@ export const AuthorEntryFragmentDoc = gql`
   gender
 }
     `;
-export const AuthorSearchDocument = gql`
-    query AuthorSearch($skip: Int) {
-  AuthorFindMany(skip: $skip) {
-    id
-    firstName
-    lastName
-    gender
-  }
+export const PaginationFragmentDoc = gql`
+    fragment Pagination on Pagination {
+  pageIndex
+  pageSize
+  total
 }
     `;
+export const AuthorSearchDocument = gql`
+    query AuthorSearch($skip: Int = 0, $take: Int = 10, $where: AuthorWhereInput = {}) {
+  pagination: AuthorPagination(skip: $skip, take: $take, where: $where) {
+    ...Pagination
+  }
+  entries: AuthorFindMany(skip: $skip, take: $take, where: $where) {
+    ...AuthorEntry
+  }
+}
+    ${PaginationFragmentDoc}
+${AuthorEntryFragmentDoc}`;
 
   @Injectable({
     providedIn: 'root'

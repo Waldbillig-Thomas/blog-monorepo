@@ -200,6 +200,12 @@ input NestedStringFilter {
   startsWith: String
 }
 
+type Pagination {
+  pageIndex: Int!
+  pageSize: Int!
+  total: Int!
+}
+
 type Post {
   author: Author!
   authorId: String!
@@ -377,9 +383,11 @@ input PostWhereUniqueInput {
 
 type Query {
   AuthorAggregate(_count: AuthorCountAggregateInput, _max: AuthorMaxAggregateInput, _min: AuthorMinAggregateInput, cursor: AuthorWhereUniqueInput, orderBy: [AuthorOrderByInput!], skip: Int, take: Int, where: AuthorWhereInput): AuthorCountAggregate!
+  AuthorCount(cursor: AuthorWhereUniqueInput, distinct: [AuthorScalarFieldEnum!], orderBy: [AuthorOrderByInput!], skip: Int, take: Int, where: AuthorWhereInput): Int!
   AuthorFindFirst(cursor: AuthorWhereUniqueInput, distinct: [AuthorScalarFieldEnum!], orderBy: [AuthorOrderByInput!], skip: Int, take: Int, where: AuthorWhereInput): Author!
   AuthorFindMany(cursor: AuthorWhereUniqueInput, distinct: [AuthorScalarFieldEnum!], orderBy: [AuthorOrderByInput!], skip: Int, take: Int, where: AuthorWhereInput): [Author!]!
   AuthorFindUnique(where: AuthorWhereUniqueInput!): Author!
+  AuthorPagination(cursor: AuthorWhereUniqueInput, distinct: [AuthorScalarFieldEnum!], orderBy: [AuthorOrderByInput!], skip: Int, take: Int, where: AuthorWhereInput): Pagination!
   PostAggregate(_count: PostCountAggregateInput, _max: PostMaxAggregateInput, _min: PostMinAggregateInput, cursor: PostWhereUniqueInput, orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): PostCountAggregate!
   PostFindFirst(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): Post!
   PostFindMany(cursor: PostWhereUniqueInput, distinct: [PostScalarFieldEnum!], orderBy: [PostOrderByInput!], skip: Int, take: Int, where: PostWhereInput): [Post!]!

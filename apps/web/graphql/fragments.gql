@@ -1,0 +1,12 @@
+fragment AuthorEntry on Author {
+  id
+  firstName
+  lastName
+  gender
+}
+
+fragment Pagination on Pagination {
+  pageIndex
+  pageSize
+  total
+}
