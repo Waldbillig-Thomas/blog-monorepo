@@ -1,5 +1,11 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
@@ -15,9 +21,17 @@ import { map, shareReplay } from 'rxjs/operators';
         [mode]="(isHandset$ | async) ? 'over' : 'side'"
         [opened]="(isHandset$ | async) === false"
       >
-        <mat-toolbar>Menu</mat-toolbar>
+        <mat-toolbar color="accent">Menu</mat-toolbar>
+
+        <mat-slide-toggle
+          [checked]="isDark"
+          (toggleChange)="toggleTheme.emit()"
+        >
+          Dark Mode
+        </mat-slide-toggle>
+
         <mat-nav-list>
-          <a mat-list-item href="#">Link 1</a>
+          <a mat-list-item routerLink="/author">Authors</a>
           <a mat-list-item href="#">Link 2</a>
           <a mat-list-item href="#">Link 3</a>
         </mat-nav-list>
@@ -61,6 +75,12 @@ import { map, shareReplay } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavigationComponent {
+  @Input()
+  isDark!: boolean;
+
+  @Output()
+  toggleTheme = new EventEmitter<void>();
+
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
