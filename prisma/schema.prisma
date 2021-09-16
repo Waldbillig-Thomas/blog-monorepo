@@ -22,6 +22,7 @@ model Author {
   id        String   @id @default(uuid())
   firstName String
   lastName  String
+  email     String
   gender    Gender
   posts     Post[]
   createdAt DateTime @default(now())

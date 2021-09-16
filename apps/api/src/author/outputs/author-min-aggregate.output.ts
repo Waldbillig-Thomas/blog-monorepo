@@ -14,6 +14,9 @@ export class AuthorMinAggregate {
     @Field(() => String, {nullable:true})
     lastName?: string;
 
+    @Field(() => String, {nullable:true})
+    email?: string;
+
     @Field(() => Gender, {nullable:true})
     gender?: keyof typeof Gender;
 

@@ -14,6 +14,9 @@ export class AuthorCreateWithoutPostsInput {
     @Field(() => String, {nullable:false})
     lastName!: string;
 
+    @Field(() => String, {nullable:false})
+    email!: string;
+
     @Field(() => Gender, {nullable:false})
     gender!: keyof typeof Gender;
 

@@ -14,6 +14,9 @@ export class AuthorCountAggregateInput {
     lastName?: true;
 
     @Field(() => Boolean, {nullable:true})
+    email?: true;
+
+    @Field(() => Boolean, {nullable:true})
     gender?: true;
 
     @Field(() => Boolean, {nullable:true})

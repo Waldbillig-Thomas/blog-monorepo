@@ -4,7 +4,10 @@ export enum AuthorScalarFieldEnum {
     id = "id",
     firstName = "firstName",
     lastName = "lastName",
-    gender = "gender"
+    email = "email",
+    gender = "gender",
+    createdAt = "createdAt",
+    updatedAt = "updatedAt"
 }
 
 registerEnumType(AuthorScalarFieldEnum, { name: 'AuthorScalarFieldEnum' })

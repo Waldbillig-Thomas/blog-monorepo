@@ -25,6 +25,9 @@ export class AuthorScalarWhereWithAggregatesInput {
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     lastName?: StringWithAggregatesFilter;
 
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    email?: StringWithAggregatesFilter;
+
     @Field(() => EnumGenderWithAggregatesFilter, {nullable:true})
     gender?: EnumGenderWithAggregatesFilter;
 

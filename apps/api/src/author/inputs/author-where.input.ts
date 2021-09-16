@@ -26,6 +26,9 @@ export class AuthorWhereInput {
     @Field(() => StringFilter, {nullable:true})
     lastName?: StringFilter;
 
+    @Field(() => StringFilter, {nullable:true})
+    email?: StringFilter;
+
     @Field(() => EnumGenderFilter, {nullable:true})
     gender?: EnumGenderFilter;
 

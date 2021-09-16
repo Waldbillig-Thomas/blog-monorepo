@@ -1,5 +1,6 @@
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AffectedRows } from '../prisma/outputs/affected-rows.output';
+import { Pagination } from '../prisma/outputs/pagination.output';
 import { PrismaService } from '../prisma/prisma.service';
 import { AuthorAggregateArgs } from './args/author-aggregate.args';
 import { CreateManyAuthorArgs } from './args/create-many-author.args';
@@ -12,7 +13,7 @@ import { FindUniqueAuthorArgs } from './args/find-unique-author.args';
 import { UpdateManyAuthorArgs } from './args/update-many-author.args';
 import { UpdateOneAuthorArgs } from './args/update-one-author.args';
 import { UpsertOneAuthorArgs } from './args/upsert-one-author.args';
-import { Author, Pagination } from './models/author.model';
+import { Author } from './models/author.model';
 import { AuthorCountAggregate } from './outputs/author-count-aggregate.output';
 
 @Resolver(() => Author)
@@ -31,7 +32,7 @@ export class AuthorResolver {
   async pagination(@Args() args: FindManyAuthorArgs): Promise<Pagination> {
     return {
       total: await this.count({ where: args.where }),
-      pageIndex: (args.skip || 0) / (args.take || 25),
+      pageIndex: Math.ceil((args.skip || 0) / (args.take || 25)),
       pageSize: args.take || 25,
     };
   }

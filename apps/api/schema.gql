@@ -8,6 +8,7 @@ type AffectedRows {
 
 type Author {
   createdAt: DateTime!
+  email: String!
   firstName: String!
   gender: Gender!
   id: ID!
@@ -19,6 +20,7 @@ type Author {
 type AuthorCountAggregate {
   _all: Int!
   createdAt: Int!
+  email: Int!
   firstName: Int!
   gender: Int!
   id: Int!
@@ -29,6 +31,7 @@ type AuthorCountAggregate {
 input AuthorCountAggregateInput {
   _all: Boolean
   createdAt: Boolean
+  email: Boolean
   firstName: Boolean
   gender: Boolean
   id: Boolean
@@ -38,6 +41,7 @@ input AuthorCountAggregateInput {
 
 input AuthorCreateInput {
   createdAt: DateTime
+  email: String!
   firstName: String!
   gender: Gender!
   id: String
@@ -48,6 +52,7 @@ input AuthorCreateInput {
 
 input AuthorCreateManyInput {
   createdAt: DateTime
+  email: String!
   firstName: String!
   gender: Gender!
   id: String
@@ -68,6 +73,7 @@ input AuthorCreateOrConnectWithoutPostsInput {
 
 input AuthorCreateWithoutPostsInput {
   createdAt: DateTime
+  email: String!
   firstName: String!
   gender: Gender!
   id: String
@@ -77,6 +83,7 @@ input AuthorCreateWithoutPostsInput {
 
 input AuthorMaxAggregateInput {
   createdAt: Boolean
+  email: Boolean
   firstName: Boolean
   gender: Boolean
   id: Boolean
@@ -86,6 +93,7 @@ input AuthorMaxAggregateInput {
 
 input AuthorMinAggregateInput {
   createdAt: Boolean
+  email: Boolean
   firstName: Boolean
   gender: Boolean
   id: Boolean
@@ -95,6 +103,7 @@ input AuthorMinAggregateInput {
 
 input AuthorOrderByInput {
   createdAt: SortOrder
+  email: SortOrder
   firstName: SortOrder
   gender: SortOrder
   id: SortOrder
@@ -108,14 +117,18 @@ input AuthorRelationFilter {
 }
 
 enum AuthorScalarFieldEnum {
+  createdAt
+  email
   firstName
   gender
   id
   lastName
+  updatedAt
 }
 
 input AuthorUpdateInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
   gender: EnumGenderFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -126,6 +139,7 @@ input AuthorUpdateInput {
 
 input AuthorUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
   gender: EnumGenderFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -143,6 +157,7 @@ input AuthorUpdateOneRequiredWithoutPostsInput {
 
 input AuthorUpdateWithoutPostsInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
   gender: EnumGenderFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
@@ -160,6 +175,7 @@ input AuthorWhereInput {
   NOT: [AuthorWhereInput!]
   OR: [AuthorWhereInput!]
   createdAt: DateTimeFilter
+  email: StringFilter
   firstName: StringFilter
   gender: EnumGenderFilter
   id: StringFilter
@@ -380,8 +396,10 @@ input PostOrderByInput {
 enum PostScalarFieldEnum {
   authorId
   content
+  createdAt
   id
   title
+  updatedAt
 }
 
 input PostScalarWhereInput {

@@ -15,6 +15,9 @@ export class AuthorCountAggregate {
     lastName!: number;
 
     @Field(() => Int, {nullable:false})
+    email!: number;
+
+    @Field(() => Int, {nullable:false})
     gender!: number;
 
     @Field(() => Int, {nullable:false})

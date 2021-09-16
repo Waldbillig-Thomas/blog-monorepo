@@ -2,10 +2,9 @@ import { Gender, Prisma, PrismaClient } from '@prisma/client';
 import { Chance } from 'chance';
 
 const chance = new Chance(1337);
-
 const prisma: PrismaClient = new PrismaClient();
 
-function getAuthor(index: number): Prisma.AuthorCreateInput {
+function getAuthor(): Prisma.AuthorCreateInput {
   const gender = chance.gender() as 'male' | 'female';
 
   return {
@@ -13,18 +12,23 @@ function getAuthor(index: number): Prisma.AuthorCreateInput {
     firstName: chance.first({ gender }),
     lastName: chance.last(),
     gender: { Female: Gender.FEMALE, Male: Gender.MALE }[gender],
+    email: chance.email(),
     posts: {
       createMany: {
-        data: Array.from({ length: 10 }).map((current, index) =>
-          getPost(index)
+        data: Array.from({ length: chance.integer({ min: 0, max: 20 }) }).map(
+          () => getPost()
         ),
       },
     },
   };
 }
 
-function getPost(index: number): Prisma.PostCreateWithoutAuthorInput {
-  return { title: 'title ' + index, content: 'content ' + index };
+function getPost(): Prisma.PostCreateManyAuthorInput {
+  return {
+    id: chance.guid(),
+    title: chance.sentence(),
+    content: chance.paragraph(),
+  };
 }
 
 async function main() {
@@ -33,9 +37,9 @@ async function main() {
   await prisma.author.deleteMany();
 
   console.log(`Start seeding ...`);
-  await Array.from({ length: 100 }).reduce(async (previous, current, index) => {
+  await Array.from({ length: 1000 }).reduce(async (previous) => {
     await previous;
-    return prisma.author.create({ data: getAuthor(index) });
+    return prisma.author.create({ data: getAuthor() });
   }, Promise.resolve());
 
   console.log(`Seeding finished.`);

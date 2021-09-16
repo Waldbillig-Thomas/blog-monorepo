@@ -17,6 +17,9 @@ export class AuthorUpdateInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     lastName?: StringFieldUpdateOperationsInput;
 
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    email?: StringFieldUpdateOperationsInput;
+
     @Field(() => EnumGenderFieldUpdateOperationsInput, {nullable:true})
     gender?: EnumGenderFieldUpdateOperationsInput;
 

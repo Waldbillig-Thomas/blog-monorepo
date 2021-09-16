@@ -24,6 +24,7 @@ export interface AffectedRows {
 export interface Author {
   __typename?: 'Author';
   createdAt: Scalars['DateTime'];
+  email: Scalars['String'];
   firstName: Scalars['String'];
   gender: Gender;
   id: Scalars['ID'];
@@ -36,6 +37,7 @@ export interface AuthorCountAggregate {
   __typename?: 'AuthorCountAggregate';
   _all: Scalars['Int'];
   createdAt: Scalars['Int'];
+  email: Scalars['Int'];
   firstName: Scalars['Int'];
   gender: Scalars['Int'];
   id: Scalars['Int'];
@@ -46,6 +48,7 @@ export interface AuthorCountAggregate {
 export interface AuthorCountAggregateInput {
   _all?: Maybe<Scalars['Boolean']>;
   createdAt?: Maybe<Scalars['Boolean']>;
+  email?: Maybe<Scalars['Boolean']>;
   firstName?: Maybe<Scalars['Boolean']>;
   gender?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['Boolean']>;
@@ -55,6 +58,7 @@ export interface AuthorCountAggregateInput {
 
 export interface AuthorCreateInput {
   createdAt?: Maybe<Scalars['DateTime']>;
+  email: Scalars['String'];
   firstName: Scalars['String'];
   gender: Gender;
   id?: Maybe<Scalars['String']>;
@@ -65,6 +69,7 @@ export interface AuthorCreateInput {
 
 export interface AuthorCreateManyInput {
   createdAt?: Maybe<Scalars['DateTime']>;
+  email: Scalars['String'];
   firstName: Scalars['String'];
   gender: Gender;
   id?: Maybe<Scalars['String']>;
@@ -85,6 +90,7 @@ export interface AuthorCreateOrConnectWithoutPostsInput {
 
 export interface AuthorCreateWithoutPostsInput {
   createdAt?: Maybe<Scalars['DateTime']>;
+  email: Scalars['String'];
   firstName: Scalars['String'];
   gender: Gender;
   id?: Maybe<Scalars['String']>;
@@ -94,6 +100,7 @@ export interface AuthorCreateWithoutPostsInput {
 
 export interface AuthorMaxAggregateInput {
   createdAt?: Maybe<Scalars['Boolean']>;
+  email?: Maybe<Scalars['Boolean']>;
   firstName?: Maybe<Scalars['Boolean']>;
   gender?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['Boolean']>;
@@ -103,6 +110,7 @@ export interface AuthorMaxAggregateInput {
 
 export interface AuthorMinAggregateInput {
   createdAt?: Maybe<Scalars['Boolean']>;
+  email?: Maybe<Scalars['Boolean']>;
   firstName?: Maybe<Scalars['Boolean']>;
   gender?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['Boolean']>;
@@ -112,6 +120,7 @@ export interface AuthorMinAggregateInput {
 
 export interface AuthorOrderByInput {
   createdAt?: Maybe<SortOrder>;
+  email?: Maybe<SortOrder>;
   firstName?: Maybe<SortOrder>;
   gender?: Maybe<SortOrder>;
   id?: Maybe<SortOrder>;
@@ -125,14 +134,18 @@ export interface AuthorRelationFilter {
 }
 
 export enum AuthorScalarFieldEnum {
+  CreatedAt = 'createdAt',
+  Email = 'email',
   FirstName = 'firstName',
   Gender = 'gender',
   Id = 'id',
-  LastName = 'lastName'
+  LastName = 'lastName',
+  UpdatedAt = 'updatedAt'
 }
 
 export interface AuthorUpdateInput {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  email?: Maybe<StringFieldUpdateOperationsInput>;
   firstName?: Maybe<StringFieldUpdateOperationsInput>;
   gender?: Maybe<EnumGenderFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -143,6 +156,7 @@ export interface AuthorUpdateInput {
 
 export interface AuthorUpdateManyMutationInput {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  email?: Maybe<StringFieldUpdateOperationsInput>;
   firstName?: Maybe<StringFieldUpdateOperationsInput>;
   gender?: Maybe<EnumGenderFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -160,6 +174,7 @@ export interface AuthorUpdateOneRequiredWithoutPostsInput {
 
 export interface AuthorUpdateWithoutPostsInput {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  email?: Maybe<StringFieldUpdateOperationsInput>;
   firstName?: Maybe<StringFieldUpdateOperationsInput>;
   gender?: Maybe<EnumGenderFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
@@ -177,6 +192,7 @@ export interface AuthorWhereInput {
   NOT?: Maybe<Array<AuthorWhereInput>>;
   OR?: Maybe<Array<AuthorWhereInput>>;
   createdAt?: Maybe<DateTimeFilter>;
+  email?: Maybe<StringFilter>;
   firstName?: Maybe<StringFilter>;
   gender?: Maybe<EnumGenderFilter>;
   id?: Maybe<StringFilter>;
@@ -476,8 +492,10 @@ export interface PostOrderByInput {
 export enum PostScalarFieldEnum {
   AuthorId = 'authorId',
   Content = 'content',
+  CreatedAt = 'createdAt',
   Id = 'id',
-  Title = 'title'
+  Title = 'title',
+  UpdatedAt = 'updatedAt'
 }
 
 export interface PostScalarWhereInput {
