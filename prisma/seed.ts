@@ -39,7 +39,7 @@ async function main() {
   console.log(`Start seeding ...`);
   await Array.from({ length: 1000 }).reduce(async (previous) => {
     await previous;
-    return prisma.author.create({ data: getAuthor() });
+    await prisma.author.create({ data: getAuthor() });
   }, Promise.resolve());
 
   console.log(`Seeding finished.`);
