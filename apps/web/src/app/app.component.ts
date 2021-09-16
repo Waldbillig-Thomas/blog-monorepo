@@ -4,10 +4,43 @@ import { Component } from '@angular/core';
   selector: 'blog-root',
   template: `
     <blog-navigation [isDark]="isDark" (toggleTheme)="switchTheme()">
+      <ng-container links>
+        <mat-nav-list>
+          <a mat-list-item routerLinkActive="active" routerLink="/author">
+            <mat-icon mat-list-icon>people</mat-icon>
+            <div mat-line>Authors</div>
+          </a>
+
+          <a mat-list-item routerLinkActive="active" routerLink="/post">
+            <mat-icon mat-list-icon>message</mat-icon>
+            <div mat-line>Posts</div>
+          </a>
+        </mat-nav-list>
+
+        <br />
+
+        <mat-slide-toggle [checked]="isDark" (toggleChange)="switchTheme()">
+          Dark Mode
+        </mat-slide-toggle>
+      </ng-container>
+
       <router-outlet></router-outlet>
     </blog-navigation>
   `,
-  styles: [],
+  styles: [
+    `
+      :host {
+        mat-accordion {
+          display: block;
+          margin: 16px;
+        }
+
+        [mat-list-item].active {
+          background-color: rgba(0, 0, 0, 0.2);
+        }
+      }
+    `,
+  ],
 })
 export class AppComponent {
   isDark = true;
@@ -23,12 +56,7 @@ export class AppComponent {
 
   updateTheme() {
     const body = document.getElementsByTagName('body')[0];
-    if (this.isDark) {
-      body.classList.remove('light-theme');
-      body.classList.add('dark-theme');
-    } else {
-      body.classList.remove('dark-theme');
-      body.classList.add('light-theme');
-    }
+    body.classList.remove(this.isDark ? 'light-theme' : 'dark-theme');
+    body.classList.add(this.isDark ? 'dark-theme' : 'light-theme');
   }
 }

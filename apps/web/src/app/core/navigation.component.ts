@@ -1,11 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
@@ -23,18 +17,7 @@ import { map, shareReplay } from 'rxjs/operators';
       >
         <mat-toolbar color="accent">Menu</mat-toolbar>
 
-        <mat-slide-toggle
-          [checked]="isDark"
-          (toggleChange)="toggleTheme.emit()"
-        >
-          Dark Mode
-        </mat-slide-toggle>
-
-        <mat-nav-list>
-          <a mat-list-item routerLink="/author">Authors</a>
-          <a mat-list-item href="#">Link 2</a>
-          <a mat-list-item href="#">Link 3</a>
-        </mat-nav-list>
+        <ng-content select="[links]"></ng-content>
       </mat-sidenav>
 
       <mat-sidenav-content>
@@ -51,7 +34,7 @@ import { map, shareReplay } from 'rxjs/operators';
           <span>Title</span>
         </mat-toolbar>
 
-        <router-outlet></router-outlet>
+        <ng-content></ng-content>
       </mat-sidenav-content>
     </mat-sidenav-container>
   `,
@@ -62,7 +45,7 @@ import { map, shareReplay } from 'rxjs/operators';
       }
 
       .sidenav {
-        width: 200px;
+        min-width: 250px;
       }
 
       .mat-toolbar.mat-primary {
@@ -77,9 +60,6 @@ import { map, shareReplay } from 'rxjs/operators';
 export class NavigationComponent {
   @Input()
   isDark!: boolean;
-
-  @Output()
-  toggleTheme = new EventEmitter<void>();
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)

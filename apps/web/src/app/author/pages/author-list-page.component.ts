@@ -4,7 +4,7 @@ import { AuthorsStore } from '../authors.store';
 @Component({
   selector: 'blog-author-list-page',
   template: `
-    <mat-card class="mat-elevation-z1">
+    <mat-card class="mat-elevation-z3">
       <mat-card-header>
         <!-- <div mat-card-avatar><mat-icon>person</mat-icon></div> -->
         <mat-card-title> Authors </mat-card-title>

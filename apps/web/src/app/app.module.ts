@@ -1,5 +1,9 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Provider } from '@angular/core';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
@@ -40,6 +44,10 @@ const routes: Routes = [
     BrowserModule,
     CoreModule,
     HttpClientModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatListModule,
+    MatSlideToggleModule,
     RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' }),
   ],
   providers: [ApolloProvider],

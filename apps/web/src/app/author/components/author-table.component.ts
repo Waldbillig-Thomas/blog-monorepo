@@ -75,7 +75,6 @@ import { AuthorEntryFragment } from '../../../generated/graphql';
       [mat-cell],
       [mat-header-cell] {
         padding: 4px;
-        text-align: center;
       }
 
       mat-icon {
