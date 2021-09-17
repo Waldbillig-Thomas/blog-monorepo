@@ -7,6 +7,23 @@ fragment AuthorEntry on Author {
   updatedAt
 }
 
+fragment AuthorDetails on Author {
+  id
+  firstName
+  lastName
+  gender
+  email
+  createdAt
+  updatedAt
+  posts {
+    id
+    title
+    content
+    createdAt
+    updatedAt
+  }
+}
+
 fragment Pagination on Pagination {
   pageIndex
   pageSize

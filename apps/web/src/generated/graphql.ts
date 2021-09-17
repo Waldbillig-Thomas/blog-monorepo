@@ -721,6 +721,8 @@ export interface StringFilter {
 
 export type AuthorEntryFragment = { __typename?: 'Author', id: string, firstName: string, lastName: string, gender: Gender, createdAt: any, updatedAt: any };
 
+export type AuthorDetailsFragment = { __typename?: 'Author', id: string, firstName: string, lastName: string, gender: Gender, email: string, createdAt: any, updatedAt: any, posts?: Maybe<Array<{ __typename?: 'Post', id: string, title: string, content: string, createdAt: any, updatedAt: any }>> };
+
 export type PaginationFragment = { __typename?: 'Pagination', pageIndex: number, pageSize: number, total: number };
 
 export type AuthorSearchQueryVariables = Exact<{
@@ -732,6 +734,13 @@ export type AuthorSearchQueryVariables = Exact<{
 
 export type AuthorSearchQuery = { __typename?: 'Query', pagination: { __typename?: 'Pagination', pageIndex: number, pageSize: number, total: number }, entries: Array<{ __typename?: 'Author', id: string, firstName: string, lastName: string, gender: Gender, createdAt: any, updatedAt: any }> };
 
+export type AuthorDetailsQueryVariables = Exact<{
+  id?: Maybe<Scalars['String']>;
+}>;
+
+
+export type AuthorDetailsQuery = { __typename?: 'Query', details: { __typename?: 'Author', id: string, firstName: string, lastName: string, gender: Gender, email: string, createdAt: any, updatedAt: any, posts?: Maybe<Array<{ __typename?: 'Post', id: string, title: string, content: string, createdAt: any, updatedAt: any }>> } };
+
 export const AuthorEntryFragmentDoc = gql`
     fragment AuthorEntry on Author {
   id
@@ -740,6 +749,24 @@ export const AuthorEntryFragmentDoc = gql`
   gender
   createdAt
   updatedAt
+}
+    `;
+export const AuthorDetailsFragmentDoc = gql`
+    fragment AuthorDetails on Author {
+  id
+  firstName
+  lastName
+  gender
+  email
+  createdAt
+  updatedAt
+  posts {
+    id
+    title
+    content
+    createdAt
+    updatedAt
+  }
 }
     `;
 export const PaginationFragmentDoc = gql`
@@ -766,6 +793,24 @@ ${AuthorEntryFragmentDoc}`;
   })
   export class AuthorSearchGQL extends Apollo.Query<AuthorSearchQuery, AuthorSearchQueryVariables> {
     document = AuthorSearchDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AuthorDetailsDocument = gql`
+    query AuthorDetails($id: String) {
+  details: AuthorFindUnique(where: {id: $id}) {
+    ...AuthorDetails
+  }
+}
+    ${AuthorDetailsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AuthorDetailsGQL extends Apollo.Query<AuthorDetailsQuery, AuthorDetailsQueryVariables> {
+    document = AuthorDetailsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

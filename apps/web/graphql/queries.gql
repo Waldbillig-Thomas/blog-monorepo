@@ -10,3 +10,9 @@ query AuthorSearch(
     ...AuthorEntry
   }
 }
+
+query AuthorDetails($id: String) {
+  details: AuthorFindUnique(where: { id: $id }) {
+    ...AuthorDetails
+  }
+}

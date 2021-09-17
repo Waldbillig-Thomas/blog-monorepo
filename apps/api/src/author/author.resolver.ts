@@ -1,4 +1,13 @@
-import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Int,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
+import { Post } from '../post/models/post.model';
 import { AffectedRows } from '../prisma/outputs/affected-rows.output';
 import { Pagination } from '../prisma/outputs/pagination.output';
 import { PrismaService } from '../prisma/prisma.service';
@@ -56,6 +65,12 @@ export class AuthorResolver {
   // groupBy(@Args() args: AuthorGroupByArgs) {
   //   return this.prismaService.author.groupBy(args);
   // }
+
+  @ResolveField(() => [Post])
+  posts(@Parent() author: Author): Promise<Post[]> {
+    // TODO replace with service
+    return this.prismaService.post.findMany({ where: { authorId: author.id } });
+  }
 
   @Mutation(() => Author, { name: 'AuthorCreate' })
   create(@Args() args: CreateOneAuthorArgs): Promise<Author> {

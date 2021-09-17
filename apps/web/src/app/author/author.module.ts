@@ -10,6 +10,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { AuthorPageComponent } from './author-page.component';
 import { AuthorRoutingModule } from './author-routing.module';
+import { AuthorDetailsComponent } from './components/author-details.component';
 import { AuthorFiltersComponent } from './components/author-filters.component';
 import { AuthorFormComponent } from './components/author-form.component';
 import { AuthorTableComponent } from './components/author-table.component';
@@ -22,6 +23,7 @@ import { AuthorUpdatePageComponent } from './pages/author-update-page.component'
   declarations: [
     AuthorCreatePageComponent,
     AuthorDatailsPageComponent,
+    AuthorDetailsComponent,
     AuthorFiltersComponent,
     AuthorFormComponent,
     AuthorListPageComponent,

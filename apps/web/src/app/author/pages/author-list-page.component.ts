@@ -1,8 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PaginationFragment } from '../../../generated/graphql';
+import {
+  AuthorEntryFragment,
+  PaginationFragment
+} from '../../../generated/graphql';
 import { AuthorsStore } from '../authors.store';
 
 @Component({
@@ -56,6 +60,7 @@ import { AuthorsStore } from '../authors.store';
               *ngIf="tableData$ | async as data"
               [columns]="data.columns"
               [entries]="data.entries"
+              (authorSelected)="authorSelected($event)"
             ></blog-author-table>
           </mat-card-content>
 
@@ -131,12 +136,21 @@ export class AuthorListPageComponent implements OnInit {
     this.authorsStore.entries$,
   ]).pipe(map(([columns, entries]) => ({ columns, entries })));
 
-  constructor(private readonly authorsStore: AuthorsStore) {}
+  constructor(
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly authorsStore: AuthorsStore,
+    private readonly router: Router,
+  ) {}
 
   ngOnInit(): void {}
 
   updatePagination({ pageIndex, pageSize, length: total }: PageEvent) {
     const pagination: PaginationFragment = { pageIndex, pageSize, total };
     this.authorsStore.updatePagination(pagination);
+  }
+
+  authorSelected({ id }: AuthorEntryFragment) {
+    console.log(id);
+    this.router.navigate(['details', id], { relativeTo: this.activatedRoute });
   }
 }

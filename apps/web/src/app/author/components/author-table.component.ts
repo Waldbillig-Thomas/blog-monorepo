@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { AuthorEntryFragment } from '../../../generated/graphql';
 
 @Component({
@@ -16,7 +22,11 @@ import { AuthorEntryFragment } from '../../../generated/graphql';
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let row">
             <div class="actions">
-              <button mat-icon-button class="show-more">
+              <button
+                mat-icon-button
+                class="show-more"
+                (click)="authorSelected.emit(row)"
+              >
                 <mat-icon>expand_more</mat-icon>
               </button>
               <!-- <button mat-icon-button class="show-less">
@@ -124,6 +134,9 @@ export class AuthorTableComponent {
 
   @Input()
   columns!: (keyof AuthorEntryFragment | 'more')[];
+
+  @Output()
+  authorSelected = new EventEmitter<AuthorEntryFragment>();
 
   // constructor() {}
 }
