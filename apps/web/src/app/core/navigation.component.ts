@@ -11,9 +11,9 @@ import { map, shareReplay } from 'rxjs/operators';
         #drawer
         class="sidenav"
         fixedInViewport
-        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-        [mode]="(isHandset$ | async) ? 'over' : 'side'"
-        [opened]="(isHandset$ | async) === false"
+        [attr.role]="(fixSidebar$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(fixSidebar$ | async) ? 'over' : 'side'"
+        [opened]="(fixSidebar$ | async) === false"
       >
         <mat-toolbar color="accent">Menu</mat-toolbar>
 
@@ -27,7 +27,7 @@ import { map, shareReplay } from 'rxjs/operators';
             aria-label="Toggle sidenav"
             mat-icon-button
             (click)="drawer.toggle()"
-            *ngIf="isHandset$ | async"
+            *ngIf="fixSidebar$ | async"
           >
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
           </button>
@@ -61,8 +61,8 @@ export class NavigationComponent {
   @Input()
   isDark!: boolean;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
+  fixSidebar$: Observable<boolean> = this.breakpointObserver
+    .observe([Breakpoints.XSmall, Breakpoints.Small])
     .pipe(
       map((result) => result.matches),
       shareReplay()
