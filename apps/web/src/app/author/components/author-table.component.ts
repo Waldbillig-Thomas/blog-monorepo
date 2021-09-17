@@ -11,6 +11,21 @@ import { AuthorEntryFragment } from '../../../generated/graphql';
 
     <ng-template #table>
       <table mat-table matSort aria-label="Authors" [dataSource]="entries">
+        <!-- More  -->
+        <ng-container matColumnDef="more">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row">
+            <div class="actions">
+              <button mat-icon-button class="show-more">
+                <mat-icon>expand_more</mat-icon>
+              </button>
+              <!-- <button mat-icon-button class="show-less">
+                <mat-icon>expand_less</mat-icon>
+              </button> -->
+            </div>
+          </td>
+        </ng-container>
+
         <!-- Id -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
@@ -61,6 +76,16 @@ import { AuthorEntryFragment } from '../../../generated/graphql';
           </td>
         </ng-container>
 
+        <!-- Delete  -->
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button class="delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
@@ -74,7 +99,7 @@ import { AuthorEntryFragment } from '../../../generated/graphql';
 
       [mat-cell],
       [mat-header-cell] {
-        padding: 4px;
+        padding: 4px !important;
       }
 
       mat-icon {
@@ -85,6 +110,10 @@ import { AuthorEntryFragment } from '../../../generated/graphql';
           color: hotpink;
         }
       }
+
+      .mat-column-delete {
+        color: tomato;
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -93,13 +122,15 @@ export class AuthorTableComponent {
   @Input()
   entries!: AuthorEntryFragment[];
 
-  displayedColumns: (keyof AuthorEntryFragment)[] = [
-    // 'id',
+  displayedColumns: (keyof AuthorEntryFragment | 'more' | 'delete')[] = [
+    'more',
+    'id',
     'firstName',
     'lastName',
     'gender',
     'createdAt',
     'updatedAt',
+    'delete',
   ];
 
   // constructor() {}

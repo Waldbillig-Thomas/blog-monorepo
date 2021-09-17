@@ -2,7 +2,7 @@
 @include mat.core();
 
 $poc-primary: mat.define-palette(mat.$red-palette);
-$poc-accent: mat.define-palette(mat.$indigo-palette, A200, A100, A400);
+$poc-accent: mat.define-palette(mat.$blue-palette, A200, A100, A400);
 $poc-warn: mat.define-palette(mat.$orange-palette);
 
 .dark-theme {

@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { AuthorPageComponent } from './author-page.component';
@@ -21,12 +22,12 @@ import { AuthorUpdatePageComponent } from './pages/author-update-page.component'
   declarations: [
     AuthorCreatePageComponent,
     AuthorDatailsPageComponent,
+    AuthorFiltersComponent,
     AuthorFormComponent,
     AuthorListPageComponent,
     AuthorPageComponent,
     AuthorTableComponent,
     AuthorUpdatePageComponent,
-    AuthorFiltersComponent,
   ],
   imports: [
     AuthorRoutingModule,
@@ -36,6 +37,7 @@ import { AuthorUpdatePageComponent } from './pages/author-update-page.component'
     MatChipsModule,
     MatIconModule,
     MatPaginatorModule,
+    MatSidenavModule,
     MatSortModule,
     MatTableModule,
   ],

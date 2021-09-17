@@ -1,21 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'blog-author-update-page',
-  template: `
-    <p>
-      author-update-page works!
-    </p>
-  `,
-  styles: [
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  template: `<p>author-update-page works!</p>`,
+  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthorUpdatePageComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
