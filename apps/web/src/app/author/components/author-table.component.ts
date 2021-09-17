@@ -77,17 +77,17 @@ import { AuthorEntryFragment } from '../../../generated/graphql';
         </ng-container>
 
         <!-- Delete  -->
-        <ng-container matColumnDef="delete">
+        <!-- <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let row">
             <button mat-icon-button class="delete">
               <mat-icon>delete</mat-icon>
             </button>
           </td>
-        </ng-container>
+        </ng-container> -->
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns"></tr>
       </table>
     </ng-template>
   `,
@@ -122,16 +122,8 @@ export class AuthorTableComponent {
   @Input()
   entries!: AuthorEntryFragment[];
 
-  displayedColumns: (keyof AuthorEntryFragment | 'more' | 'delete')[] = [
-    'more',
-    'id',
-    'firstName',
-    'lastName',
-    'gender',
-    'createdAt',
-    'updatedAt',
-    'delete',
-  ];
+  @Input()
+  columns!: (keyof AuthorEntryFragment | 'more')[];
 
   // constructor() {}
 }

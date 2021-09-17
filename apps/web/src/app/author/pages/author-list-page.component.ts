@@ -1,4 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
+import { combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { PaginationFragment } from '../../../generated/graphql';
 import { AuthorsStore } from '../authors.store';
 
 @Component({
@@ -48,9 +52,11 @@ import { AuthorsStore } from '../authors.store';
               </mat-chip>
             </mat-chip-list>
 
-            <ng-container *ngIf="entries$ | async as entries">
-              <blog-author-table [entries]="entries"></blog-author-table>
-            </ng-container>
+            <blog-author-table
+              *ngIf="tableData$ | async as data"
+              [columns]="data.columns"
+              [entries]="data.entries"
+            ></blog-author-table>
           </mat-card-content>
 
           <mat-card-actions *ngIf="pagination$ | async as pagination">
@@ -69,7 +75,8 @@ import { AuthorsStore } from '../authors.store';
         [length]="pagination.total"
         [pageIndex]="pagination.pageIndex"
         [pageSize]="pagination.pageSize"
-        [pageSizeOptions]="[5, 10, 20]"
+        [pageSizeOptions]="[10, 25, 50, 100]"
+        (page)="updatePagination($event)"
         aria-label="Select page"
       ></mat-paginator>
     </ng-template>
@@ -79,6 +86,13 @@ import { AuthorsStore } from '../authors.store';
       :host {
         mat-drawer-container {
           margin: 16px;
+
+          mat-card-header,
+          mat-card-actions {
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            margin: -16px;
+          }
         }
 
         mat-chip-list {
@@ -94,11 +108,16 @@ import { AuthorsStore } from '../authors.store';
 
           mat-card-content {
             flex: 1 1 auto;
+            padding-top: 16px;
           }
 
           .spacer {
             flex: 1 1 auto;
           }
+        }
+
+        mat-paginator {
+          background-color: transparent;
         }
       }
     `,
@@ -106,10 +125,18 @@ import { AuthorsStore } from '../authors.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthorListPageComponent implements OnInit {
-  entries$ = this.authorsStore.entries$;
   pagination$ = this.authorsStore.pagination$;
+  tableData$ = combineLatest([
+    this.authorsStore.columns$,
+    this.authorsStore.entries$,
+  ]).pipe(map(([columns, entries]) => ({ columns, entries })));
 
   constructor(private readonly authorsStore: AuthorsStore) {}
 
   ngOnInit(): void {}
+
+  updatePagination({ pageIndex, pageSize, length: total }: PageEvent) {
+    const pagination: PaginationFragment = { pageIndex, pageSize, total };
+    this.authorsStore.updatePagination(pagination);
+  }
 }
